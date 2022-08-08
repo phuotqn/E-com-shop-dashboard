@@ -165,7 +165,7 @@ function ModalEdit({ setOpenModalEdit,openModalEdit, setVarRefeshPage, style, ha
                                     <Button onClick={onBtnEditClick} className="bg-success w-75 text-white">Edit Product</Button>
                                 </Grid>
                                 <Grid item sm={6}>
-                                    <Button className="bg-secondary w-75 text-white" onClick = {onBtnCancelClick}>Hủy Bỏ</Button>
+                                    <Button className="bg-danger w-75 text-white" onClick = {onBtnCancelClick}>Hủy Bỏ</Button>
                                 </Grid>
                             </Grid>
                         </Grid>

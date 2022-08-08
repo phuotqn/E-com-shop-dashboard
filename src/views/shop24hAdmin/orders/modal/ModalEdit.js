@@ -153,18 +153,18 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h4" align="center" style={{ color: "#00695c" }}>
-                        <strong>Sửa danh sách khách hàng</strong>
+                    <Typography id="modal-modal-title" variant="h4" align="center" style={{ color: "black" }}>
+                        <strong>Cập nhật danh sách đơn hàng</strong>
                     </Typography>
 
-                    <Grid container style={{ marginTop: "30px" }}>
-                        <Grid item xs={6} p={2}>
+                    <Grid container style={{ marginTop: "30px", justifyContent: "center" }} >
+                        <Grid item p={2}>
                             {/* ID */}
                             <Grid container mt={2}>
                                 <Grid item sm={12}>
                                     <Grid container>
                                         <Grid item sm={3}>
-                                            <Typography variant="h6"><b>ID</b></Typography>
+                                            <Typography variant="h6"><b>ID: </b></Typography>
                                         </Grid>
                                         <Grid item sm={9}>
                                             <Typography variant="h6" sx={{ color: "red" }}><b>{idEdit}</b></Typography>
@@ -177,7 +177,7 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
                                 <Grid item sm={12}>
                                     <Grid container>
                                         <Grid item sm={3}>
-                                            <label>Shipped Date:</label>
+                                            <label>Shipped Date: </label>
                                         </Grid>
                                         <Grid item sm={9}>
                                             <CFormInput fullWidth className="bg-white"
@@ -191,7 +191,7 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
                                 <Grid item sm={12}>
                                     <Grid container>
                                         <Grid item sm={3}>
-                                            <label>Note:</label>
+                                            <label>Note: </label>
                                         </Grid>
                                         <Grid item sm={9}>
                                             <CFormInput fullWidth value={note} className="bg-white"
@@ -200,12 +200,91 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
                                     </Grid>
                                 </Grid>
                             </Grid>
+
+                            {/* Cập nhật sản phẩm */}
+                            <Grid container mt={2}>
+                                <Grid sm={12} p={2} >
+                                    <Grid container align="center">
+                                        <Grid item xs={12} mb={2}>
+                                            <Button variant="contained" onClick={addNewProduct} color="success">Chọn sản phẩm</Button>
+                                        </Grid>
+                                    </Grid>
+
+                                    {
+                                        Array.from(Array(count), (e, i) => {
+                                            return (
+                                                <>
+                                                    <Grid container mt={3}>
+                                                        <Grid item sm={12}>
+                                                            <Grid container>
+                                                                <Grid item sm={3}>
+                                                                    <label>Sản phẩm:</label>
+                                                                </Grid>
+                                                                <Grid item sm={9}>
+                                                                    <FormControl fullWidth size="small">
+                                                                        <InputLabel id="demo-simple-select-label">Chọn Sản Phẩm</InputLabel>
+                                                                        <Select
+                                                                            labelId="demo-simple-select-label"
+                                                                            value={orderDetail[i].id}
+                                                                            label="Product"
+                                                                            onChange={(event) => {
+                                                                                orderDetail[i].id = event.target.value
+                                                                                orderDetail[i].price = getPrice(orderDetail[i].id) * parseInt(orderDetail[i].count)
+                                                                                setOrderDetail([...orderDetail])
+                                                                            }}>
+                                                                            <MenuItem value={"NOT"}>Chọn Sản Phẩm</MenuItem>
+                                                                            {products.map((type, index) => {
+                                                                                return (
+                                                                                    <MenuItem key={index} value={type._id}>{type.name}</MenuItem>
+                                                                                )
+                                                                            })}
+                                                                        </Select>
+                                                                    </FormControl>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid container mt={3}>
+                                                        <Grid item sm={12}>
+                                                            <Grid container>
+                                                                <Grid item xs={3}>Số lượng</Grid>
+                                                                <Grid item xs={2}>
+                                                                    <CFormInput type="number" value={orderDetail[i].count}
+                                                                        className="bg-white" size="small"
+                                                                        onChange={(event) => {
+                                                                            orderDetail[i].count = event.target.value;
+                                                                            orderDetail[i].price = getPrice(orderDetail[i].id) * parseInt(orderDetail[i].count)
+                                                                            setOrderDetail([...orderDetail])
+                                                                            console.log(orderDetail)
+                                                                        }} />
+                                                                </Grid>
+
+                                                                <Grid item xs={1}></Grid>
+
+                                                                <Grid item xs={5} mt={1}>
+                                                                    <TextField readOnly variant="standard" value={(numberWithCommas(orderDetail[i].price))}
+                                                                        className="bg-white" size="small"
+                                                                    />
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                </>
+                                            )
+                                        })
+                                    }
+                                </Grid>
+                            </Grid>
+
+
+
                             {/* Tổng tiền */}
                             <Grid container mt={2}>
                                 <Grid item sm={12}>
                                     <Grid container>
                                         <Grid item xs={3}>
-                                            <label>Tổng tiền:</label>
+                                            <label>Tổng tiền: </label>
                                         </Grid>
                                         <Grid item xs={9}>
                                             <CFormInput readOnly fullWidth value={numberWithCommas(cost)} Placeholder="cost" className="bg-white"
@@ -214,80 +293,6 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-
-                        <Grid item xs={6} p={2} >
-                            <Grid container align="center">
-                                <Grid item xs={12} mb={2}>
-                                    <Button variant="contained" onClick={addNewProduct} color="success">Chọn lại sản phẩm</Button>
-                                </Grid>
-                            </Grid>
-
-                            {
-                                Array.from(Array(count), (e, i) => {
-                                    return (
-                                        <>
-                                            <Grid container mt={3}>
-                                                <Grid item sm={12}>
-                                                    <Grid container>
-                                                        <Grid item sm={3}>
-                                                            <label>Sản phẩm:</label>
-                                                        </Grid>
-                                                        <Grid item sm={9}>
-                                                            <FormControl fullWidth size="small">
-                                                                <InputLabel id="demo-simple-select-label">Chọn Sản Phẩm</InputLabel>
-                                                                <Select
-                                                                    labelId="demo-simple-select-label"
-                                                                    value={orderDetail[i].id}
-                                                                    label="Product"
-                                                                    onChange={(event) => {
-                                                                        orderDetail[i].id = event.target.value
-                                                                        orderDetail[i].price = getPrice(orderDetail[i].id) * parseInt(orderDetail[i].count)
-                                                                        setOrderDetail([...orderDetail])
-                                                                    }}>
-                                                                    <MenuItem value={"NOT"}>Chọn Sản Phẩm</MenuItem>
-                                                                    {products.map((type, index) => {
-                                                                        return (
-                                                                            <MenuItem key={index} value={type._id}>{type.name}</MenuItem>
-                                                                        )
-                                                                    })}
-                                                                </Select>
-                                                            </FormControl>
-                                                        </Grid>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-
-                                            <Grid container mt={3}>
-                                                <Grid item sm={12}>
-                                                    <Grid container>
-                                                        <Grid item xs={3}>Số lượng</Grid>
-                                                        <Grid item xs={2}>
-                                                            <CFormInput type="number" value={orderDetail[i].count}
-                                                                className="bg-white" size="small"
-                                                                onChange={(event) => {
-                                                                    orderDetail[i].count = event.target.value;
-                                                                    orderDetail[i].price = getPrice(orderDetail[i].id) * parseInt(orderDetail[i].count)
-                                                                    setOrderDetail([...orderDetail])
-                                                                    console.log(orderDetail)
-                                                                }} />
-                                                        </Grid>
-
-                                                        <Grid item xs={1}></Grid>
-
-                                                        <Grid item xs={5} mt={1}>
-                                                            <TextField readOnly variant="standard" value={(numberWithCommas(orderDetail[i].price) )}
-                                                                className="bg-white" size="small"
-                                                            />
-                                                        </Grid>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                        </>
-                                    )
-                                })
-                            }
-
                         </Grid>
                     </Grid>
 
@@ -298,7 +303,7 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
                                     <Button onClick={onBtnUpdateClick} className="bg-success w-75 text-white">Edit Order</Button>
                                 </Grid>
                                 <Grid item sm={6}>
-                                    <Button onClick={onBtnCancelClick} className="bg-secondary w-75 text-white">Hủy Bỏ</Button>
+                                    <Button onClick={onBtnCancelClick} className="bg-danger w-75 text-white">Hủy Bỏ</Button>
                                 </Grid>
                             </Grid>
                         </Grid>

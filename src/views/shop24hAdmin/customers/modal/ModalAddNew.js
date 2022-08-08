@@ -129,7 +129,7 @@ function ModalAddNew({ openModalAdd, setOpenModalAdd, handleClose, style, fetchA
                 aria-describedby="modal-modal-phone"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h4" align="center" style={{ color: "#00695c" }}>
+                    <Typography id="modal-modal-title" variant="h4" align="center" style={{ color: "black" }}>
                         <strong>Thêm Khách Hàng</strong>
                     </Typography>
 
@@ -226,7 +226,7 @@ function ModalAddNew({ openModalAdd, setOpenModalAdd, handleClose, style, fetchA
                                     <Button onClick={onBtnInsertClick} className="bg-success w-75 text-white">Create Customer</Button>
                                 </Grid>
                                 <Grid item sm={6}>
-                                    <Button onClick={onBtnCancelClick} className="bg-secondary w-75 text-white">Hủy Bỏ</Button>
+                                    <Button onClick={onBtnCancelClick} className="bg-danger w-75 text-white">Hủy Bỏ</Button>
                                 </Grid>
                             </Grid>
                         </Grid>
