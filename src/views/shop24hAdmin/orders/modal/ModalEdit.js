@@ -104,11 +104,11 @@ function ModalEdit({ openModalEdit, handleCloseEdit, idEdit, shippedDateEdit, st
     const addNewProduct = () => {
         let newOrder = {
             id: "",
-            count: 1,
+            count: 0,
             price: 0
         }
         setOrderDetail([...orderDetail, newOrder])
-        setQuantity(count + 1)
+        setQuantity(count + 1 )
     }
 
     function numberWithCommas(x) {

@@ -14,7 +14,7 @@ import {
   cilCreditCard,
   cilCommentSquare,
   cilEnvelopeOpen,
-  cilFile,
+  cilSpreadsheet,
   cilLockLocked,
   cilSettings,
   cilTask,
@@ -77,7 +77,7 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilFile} className="me-2" />
+          <CIcon icon={cilSpreadsheet} className="me-2" />
           Projects
           <CBadge color="primary" className="ms-2">
             42

@@ -29,10 +29,10 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand style={{alignItems:"center"}} className="d-none d-md-flex" to="/">
+      <CSidebarBrand className="text-center" to="/">
         <h2>Admin Dashboard</h2>
       </CSidebarBrand>
-      <CSidebarNav>
+      <CSidebarNav className='text-center'>
         <SimpleBar>
           <AppSidebarNav items={navigation} />
         </SimpleBar>

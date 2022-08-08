@@ -53,7 +53,6 @@ function ModalAddNew({ openModalAdd, setOpenModalAdd, handleClose, style, fetchA
                 body: JSON.stringify({
                     name: name,
                     description: description,
-                    type: type,
                     imageUrl: imageUrl,
                     buyPrice: buyPrice,
                     promotionPrice: promotionPrice,
@@ -94,12 +93,6 @@ function ModalAddNew({ openModalAdd, setOpenModalAdd, handleClose, style, fetchA
             setOpenAlert(true);
             setStatusModal("error")
             setNoidungAlertValid("Chưa có mô tả cho sản phẩm")
-            return false
-        }
-        if (type === "NOT") {
-            setOpenAlert(true);
-            setStatusModal("error")
-            setNoidungAlertValid("Chưa chọn loại sản phẩm")
             return false
         }
         if (imageUrl.indexOf(".") === -1) {
