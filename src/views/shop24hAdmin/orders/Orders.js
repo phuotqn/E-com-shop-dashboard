@@ -135,7 +135,7 @@ const Orders = () => {
           </CCardHeader>
           <CCardBody>
             <h3 className="text-medium-emphasis" align="center">
-              Danh sách mặt hàng được Orders
+              Orders
             </h3>
 
             <Grid container sx={{ minWidth: 100 }} justifyContent="flex-end">

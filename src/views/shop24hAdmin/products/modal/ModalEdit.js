@@ -24,9 +24,20 @@ function ModalEdit({ setOpenModalEdit,openModalEdit, setVarRefeshPage, style, ha
     const [buyPrice, setBuyPrice] = useState("");
     const [promotionPrice, setPromotionPrice] = useState("");
     const [types, setTypes] = useState([]);
+    const [type,setType] = useState("")
     const handelCloseAlert = () => {
         setOpenAlert(false);
     }
+    useEffect(() => {
+        fetchAPI('http://localhost:8000/producttypes')
+            .then((data) => {
+                setTypes(data.data)
+                console.log(data.data)
+            })
+            .catch((error) => {
+                console.error(error.message)
+            })
+    }, [])
 
     //Đóng Modal
     const onBtnCancelClick = () => {
@@ -63,6 +74,7 @@ function ModalEdit({ setOpenModalEdit,openModalEdit, setVarRefeshPage, style, ha
                     name: name,
                     buyPrice: buyPrice,
                     promotionPrice: promotionPrice,
+                    type: type
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -108,6 +120,35 @@ function ModalEdit({ setOpenModalEdit,openModalEdit, setVarRefeshPage, style, ha
                                     <Grid item sm={9}>
                                         <TextField fullWidth label="Name" className="bg-white"
                                             size="small" value={name} onChange={(event) => setName(event.target.value)} />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container mt={2}>
+                            <Grid item sm={12}>
+                                <Grid container>
+                                    <Grid item sm={3}>
+                                        <label>Type :</label>
+                                    </Grid>
+                                    <Grid item sm={9}>
+                                        <FormControl fullWidth size="small">
+                                            <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={type}
+                                                label="Product"
+                                                onChange={(event) => setType(event.target.value)}
+                                            >
+                                                <MenuItem value={"NOT"}>Type</MenuItem>
+                                                {types.map((type, index) => {
+                                                    return (
+                                                        <MenuItem key={index} value={type._id}>{type.name}</MenuItem>
+                                                    )
+                                                })}
+                                            </Select>
+                                        </FormControl>
                                     </Grid>
                                 </Grid>
                             </Grid>

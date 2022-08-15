@@ -143,11 +143,11 @@ const Customers = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Customers</strong> <small>(Khách hàng)</small>
+            <strong>Customers</strong>
           </CCardHeader>
           <CCardBody>
             <h3 className="text-medium-emphasis" align="center">
-              Danh sách khách hàng
+              Customers
             </h3>
 
             <Grid container sx={{ minWidth: 100 }} justifyContent="flex-end">

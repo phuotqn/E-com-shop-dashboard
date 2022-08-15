@@ -85,5 +85,5 @@ function ModalDelete({ openModalDelete, idDelete, nameDelete, handleCloseDelete,
         </>
     )
 }
-
+    
 export default ModalDelete
